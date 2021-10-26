@@ -8,7 +8,7 @@ resource "oci_events_rule" "identity_rule" {
             action_type = "ONS"
             is_enabled = "true"
 
-            description = "This monitors
+            description = "This monitors most identity events."
             #function_id = oci_functions_function.test_function.id
             #stream_id = oci_streaming_stream.test_stream.id
             topic_id = oci_ons_notification_topic.admin_notification_topic.id
