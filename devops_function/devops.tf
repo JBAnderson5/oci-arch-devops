@@ -31,7 +31,7 @@ resource "oci_devops_project" "test_project" {
   compartment_id = var.compartment_ocid
   name           = "${var.app_name}_${random_string.deploy_id.result}_devops_project"
   notification_config {
-    topic_id = oci_ons_notification_topic.test_notification_topic.id
+    topic_id = oci_ons_notification_topic.admin_notification_topic.id
   }
   description  = "${var.app_name}_${random_string.deploy_id.result}_devops_project"
   defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
