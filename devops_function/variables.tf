@@ -58,7 +58,6 @@ variable "ocir_user_password" {
 
 variable "email_address" {
   default = false
-
 }
 
 # OCIR repo name & namespace

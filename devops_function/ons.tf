@@ -5,7 +5,7 @@
 
 resource "oci_ons_notification_topic" "admin_notification_topic" {
   compartment_id = var.compartment_ocid
-  name           = "${var.app_name}_${random_string.deploy_id.result}_topic"
+  name           = "admin topic"   #"${var.app_name}_${random_string.deploy_id.result}_topic"
   defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 

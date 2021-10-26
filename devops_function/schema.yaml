@@ -25,9 +25,10 @@ variableGroups:
   - deploy_pipeline_deploy_pipeline_parameters_items_name
   - compartment_ocid
   - release
+  - email_address
 
 - title: Required Configuration
-  visible: true  
+  visible: true
   variables:
   - app_name
   - ocir_user_name
@@ -36,7 +37,7 @@ variableGroups:
   - show_advanced
 
 - title: DevOps Project
-  visible: true  
+  visible: true
   variables:
   - compartment_id
   - project_description
@@ -44,22 +45,22 @@ variableGroups:
   - project_logging_config_display_name_prefix
   - project_logging_config_retention_period_in_days
 
-- title: Function & Network Configuration 
-  visible: true  
+- title: Function & Network Configuration
+  visible: true
   variables:
   - VCN-CIDR
   - fnsubnet-CIDR
   - ocir_repo_name
 
 - title: DevOps Environments
-  visible: 
+  visible:
       and:
         - show_advanced
   variables:
-  - environment_type 
+  - environment_type
 
 - title: DevOps Artifacts
-  visible: 
+  visible:
       and:
         - show_advanced
   variables:
@@ -68,23 +69,23 @@ variableGroups:
   - argument_substitution_mode
 
 - title: Pipelines & Stages
-  visible: 
+  visible:
       and:
-        - show_advanced  
+        - show_advanced
   variables:
   - deploy_stage_deploy_stage_type
   - deploy_stage_namespace
 
 - title: Policy Settings
   description: Policy setting for the stack deployment
-  visible: true  
+  visible: true
   variables:
   - create_dynamic_group_for_devops_pipln_in_compartment
   - create_dynamic_group_for_nodes_in_compartment
   - existent_dynamic_group_for_nodes_in_compartment
   - create_compartment_policies
   - create_tenancy_policies
-    
+
 
 ######################
 # Variable Definitions
@@ -92,7 +93,7 @@ variableGroups:
 
 variables:
 
-  compartment_id: 
+  compartment_id:
     type: oci:identity:compartment:id
     title: "Compartment"
     description: "The compartment in which to create resources"
@@ -117,6 +118,13 @@ variables:
     visible: true
     default: false
 
+  email_address:
+    type: string
+    title: "email address"
+    description: "email address for admin notification topic"
+    visible: true
+    default: false
+
 ## Function
 
   VCN-CIDR:
@@ -125,34 +133,34 @@ variables:
     default: "10.0.0.0/16"
     pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
     description: "VCN CIDR block where you want to create the App/Function resources."
-  
+
   fnsubnet-CIDR:
     type: string
     required: false
     default: "10.0.1.0/24"
     pattern: "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]).(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\/(3[0-2]|[1-2]?[0-9])$"
     description: "Subnet CIDR block where you want to create the App/Function resources."
-  
+
   ocir_repo_name:
     type: string
     required: true
     visibile: true
     title: "OCIR repository name"
     description: "Oracle Cloud Infrastructure Registry repository name (for example functions)"
-  
+
   ocir_user_name:
     type: string
     required: true
     visibile: true
     title: "OCIR username"
-    description: "Oracle Cloud Infrastructure Registry username (your OCI username)" 
+    description: "Oracle Cloud Infrastructure Registry username (your OCI username)"
 
   ocir_user_password:
     type: password
     required: true
     visibile: true
     title: "OCIR user password"
-    description: "Oracle Cloud Infrastructure Registry user password (your OCI user authtoken)" 
+    description: "Oracle Cloud Infrastructure Registry user password (your OCI user authtoken)"
 
 
 ## DevOps
@@ -162,7 +170,7 @@ variables:
     title: "Project description"
     description: "Choose DevOps Project description"
     default: "DevOps Project for Function deployment"
-    required: false    
+    required: false
 
   project_logging_config_is_archiving_enabled:
     type: boolean
@@ -170,7 +178,7 @@ variables:
     description: "Archiving enabled for Project Logging"
     default: false
     required: true
-    visible: 
+    visible:
       and:
         - show_advanced
 
@@ -180,7 +188,7 @@ variables:
     description: "Prefix for Logging Config"
     default: "fn-"
     required: true
-    visible: 
+    visible:
       and:
         - show_advanced
 
@@ -193,13 +201,13 @@ variables:
     multipleOf: 1
     default: 30
     required: true
-    visible: 
+    visible:
       and:
         - show_advanced
-  
+
   #############
   # Environment
-  ############# 
+  #############
 
   environment_type:
     type: enum
@@ -208,7 +216,7 @@ variables:
     title: "Environment Type"
     description: "The type of environment to target. Stack currently supports only FUNCTION"
     default: "FUNCTION"
-    visible: 
+    visible:
       and:
         - show_advanced
 
@@ -238,14 +246,14 @@ variables:
     title: "Argument substitution for the Artifact"
     description: "Artifacts can have arguments that are substituted with values are runtime. Stack currently supports only NONE"
     default: "NONE"
-  
+
   ###########
   # Pipeline
   ###########
   create_dynamic_group_for_devops_pipln_in_compartment:
     type: boolean
     title: "Create a Dynamic Group for DevOps Pipelines"
-    description: "You need to be an administrator to do this. Alternatively you can have the administrator create Dynamic group for you." 
+    description: "You need to be an administrator to do this. Alternatively you can have the administrator create Dynamic group for you."
     default: true
 
   deploy_stage_deploy_stage_type:
@@ -261,7 +269,7 @@ variables:
     title: "Namespace to use"
     description: "namespace to use for deployment."
     default: "default"
-  
+
   create_dynamic_group_for_nodes_in_compartment:
     type: boolean
     title: "Create Dynamic Group for Worker Nodes in the Compartment"
@@ -283,7 +291,7 @@ variables:
           - create_tenancy_policies
         - not:
           - create_dynamic_group_for_nodes_in_compartment
-        
+
   create_compartment_policies:
     type: boolean
     title: "Create Compartment Policies"
@@ -299,6 +307,6 @@ variables:
     visible:
       and:
         - show_advanced
-  
-  
- 
+
+
+
