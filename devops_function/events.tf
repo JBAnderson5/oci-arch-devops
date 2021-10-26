@@ -25,7 +25,8 @@ resource "oci_events_rule" "identity_rule" {
 #rules logic - condition
 #use console to generate rule logic
 locals {
-  identity_condition = "MATCH event WHERE (
+  identity_condition = <<EOT
+MATCH event WHERE (
 eventType EQUALS ANY OF (
 com.oraclecloud.identitycontrolplane.updateauthenticationpolicy,
 com.oraclecloud.identitycontrolplane.createdynamicgroup,
@@ -60,7 +61,8 @@ com.oraclecloud.identitycontrolplane.updateuser,
 com.oraclecloud.identitycontrolplane.updateusercapabilities,
 com.oraclecloud.identitycontrolplane.createfederateduser
 )
-)"
+)
+EOT
 
 
 }
