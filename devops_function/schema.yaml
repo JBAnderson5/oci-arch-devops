@@ -123,7 +123,6 @@ variables:
     title: "email address"
     description: "email address for admin notification topic"
     visible: true
-    default: false
 
 ## Function
 
