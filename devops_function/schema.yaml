@@ -25,7 +25,6 @@ variableGroups:
   - deploy_pipeline_deploy_pipeline_parameters_items_name
   - compartment_ocid
   - release
-  - email_address
 
 - title: Required Configuration
   visible: true
@@ -35,6 +34,7 @@ variableGroups:
   - ocir_user_password
   - execute_deployment
   - show_advanced
+  - email_address
 
 - title: DevOps Project
   visible: true
