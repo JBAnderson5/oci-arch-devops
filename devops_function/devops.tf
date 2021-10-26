@@ -27,12 +27,6 @@ resource "oci_logging_log" "test_log" {
   defined_tags       = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
-resource "oci_ons_notification_topic" "test_notification_topic" {
-  compartment_id = var.compartment_ocid
-  name           = "${var.app_name}_${random_string.deploy_id.result}_topic"
-  defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
-}
-
 resource "oci_devops_project" "test_project" {
   compartment_id = var.compartment_ocid
   name           = "${var.app_name}_${random_string.deploy_id.result}_devops_project"
