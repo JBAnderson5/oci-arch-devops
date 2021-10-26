@@ -26,6 +26,31 @@ resource "oci_events_rule" "identity_rule" {
 #use console to generate rule logic
 locals {
   identity_condition = <<EOT
+            {"eventType":
+            ["com.oraclecloud.identitycontrolplane.createidentityprovider",
+            "com.oraclecloud.identitycontrolplane.deleteidentityprovider",
+            "com.oraclecloud.identitycontrolplane.updateidentityprovider",
+            "com.oraclecloud.identitycontrolplane.createidpgroupmapping",
+            "com.oraclecloud.identitycontrolplane.deleteidpgroupmapping",
+            "com.oraclecloud.identitycontrolplane.updateidpgroupmapping",
+            "com.oraclecloud.identitycontrolplane.addusertogroup",
+            "com.oraclecloud.identitycontrolplane.creategroup",
+            "com.oraclecloud.identitycontrolplane.deletegroup",
+            "com.oraclecloud.identitycontrolplane.removeuserfromgroup",
+            "com.oraclecloud.identitycontrolplane.updategroup",
+            "com.oraclecloud.identitycontrolplane.createpolicy",
+            "com.oraclecloud.identitycontrolplane.deletepolicy",
+            "com.oraclecloud.identitycontrolplane.updatepolicy",
+            "com.oraclecloud.identitycontrolplane.createuser",
+            "com.oraclecloud.identitycontrolplane.deleteuser",
+            "com.oraclecloud.identitycontrolplane.updateuser",
+            "com.oraclecloud.identitycontrolplane.updateusercapabilities",
+            "com.oraclecloud.identitycontrolplane.updateuserstate"]
+            }
+EOT
+
+/*
+<<EOT
 {"eventType":
 [com.oraclecloud.identitycontrolplane.updateauthenticationpolicy,
 com.oraclecloud.identitycontrolplane.createdynamicgroup,
@@ -62,6 +87,6 @@ com.oraclecloud.identitycontrolplane.createfederateduser
 ]
 }
 EOT
-
+*/
 
 }
